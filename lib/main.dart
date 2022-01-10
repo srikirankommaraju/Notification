@@ -9,6 +9,16 @@ void main() async{
   await Firebase.initializeApp();
   LocalNotificationService.initialize();
   runApp(MyApp());
+  // FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  //
+  //
+  // _firebaseMessaging.getInitialMessage().then((message){
+  //   if (message!=null){
+  //     final mess=message.data["hi"];
+  //     print(mess);
+  //     print("Notification Recived");
+  //   }
+  // });
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
 
   int _counter = 0;
   String word="";
@@ -48,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+    Future<String?> fcmToken =_firebaseMessaging.getToken();
+
+
+    //When the app is cold
     _firebaseMessaging.getInitialMessage().then((message){
       if (message!=null){
         final mess=message.data["hi"];
