@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
     Future<String?> fcmToken =_firebaseMessaging.getToken();
+    print(fcmToken);
 
 
     //When the app is cold

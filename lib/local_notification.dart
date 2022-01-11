@@ -2,6 +2,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
+
+
+  //Singleton pattern
+  static final LocalNotificationService _notificationService = LocalNotificationService._internal();
+  factory LocalNotificationService() {
+    return _notificationService;
+  }
+  LocalNotificationService._internal();
+
+
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -9,7 +19,9 @@ class LocalNotificationService {
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-        iOS: IOSInitializationSettings());
+        iOS: IOSInitializationSettings(requestSoundPermission: false,
+          requestBadgePermission: false,
+          requestAlertPermission: false,));
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
